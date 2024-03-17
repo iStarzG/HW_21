@@ -1,7 +1,6 @@
 package specs;
 
 import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.filter.log.LogDetail;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
@@ -10,7 +9,7 @@ import static io.restassured.RestAssured.with;
 import static io.restassured.filter.log.LogDetail.BODY;
 import static io.restassured.filter.log.LogDetail.STATUS;
 import static io.restassured.http.ContentType.JSON;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
 
 public class LoginSpec {
     public static RequestSpecification loginRequestSpec = with()
@@ -18,8 +17,7 @@ public class LoginSpec {
             .log().uri()
             .log().method()
             .log().body()
-            .contentType(JSON)
-            .basePath("/api/login");
+            .contentType(JSON);
 
 
     public static ResponseSpecification loginResponseSpec = new ResponseSpecBuilder()
@@ -38,16 +36,15 @@ public class LoginSpec {
             .filter(withCustomTemplates())
             .log().uri()
             .log().method()
-            .log().body()
-            .basePath("/api/login");
+            .log().body();
+
 
     public static RequestSpecification loginRequestSpecForSchema = with()
             .filter(withCustomTemplates())
             .log().uri()
             .log().method()
             .log().body()
-            .contentType(JSON)
-            .basePath("api/users/2");
+            .contentType(JSON);
 
     public static ResponseSpecification loginResponseSpecForSchema = new ResponseSpecBuilder()
             .expectStatusCode(200)
